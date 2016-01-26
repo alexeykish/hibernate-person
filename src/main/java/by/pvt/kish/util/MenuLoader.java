@@ -19,14 +19,12 @@ import java.util.Scanner;
 public class MenuLoader {
 
     private static Logger logger = Logger.getLogger(MenuLoader.class.getName());
-    private static PersonDAO personDao = null;
 
     public static void createMenu() {
-        Person person = null;
         while (true) {
-            showMenu();
+            showMenuLevel1();
             Scanner scanner = new Scanner(System.in);
-            int command = 0;
+            int command;
             try {
                 command = scanner.nextInt();
             } catch (InputMismatchException e) {
@@ -35,43 +33,105 @@ public class MenuLoader {
             }
             switch (command) {
                 case 1:
-                    saveOrUpdatePerson();
+                    boolean level2 = true;
+                    while (level2) {
+                        showMenuPersonLevel2();
+                        try {
+                            command = scanner.nextInt();
+                        } catch (InputMismatchException e) {
+                            System.out.println("Incorrect input, parameter must be number, please try again");
+                            break;
+                        }
+                        switch (command) {
+                            case 1:
+                                saveOrUpdatePerson();
+                                break;
+                            case 2:
+                                loadPerson();
+                                break;
+                            case 3:
+                                getPerson();
+                                break;
+                            case 4:
+                                flushPerson();
+                                break;
+                            case 5:
+                                refreshPerson();
+                                break;
+                            case 6:
+                                deletePerson();
+                                break;
+                            case 7:
+                                getPersonId();
+                                break;
+                            case 0:
+                                level2 = false;
+                                System.out.println("---------------------------");
+                                break;
+                            default:
+                                System.out.println("Incorrect input, please try again");
+                                break;
+                        }
+                    }
                     break;
                 case 2:
-                    loadPerson();
+                    level2 = true;
+                    while (level2) {
+                        showMenuCompanyLevel2();
+                        try {
+                            command = scanner.nextInt();
+                        } catch (InputMismatchException e) {
+                            System.out.println("Incorrect input, parameter must be number, please try again");
+                            break;
+                        }
+                        switch (command) {
+                            case 1:
+                                saveCompany();
+                                break;
+                            case 2:
+                                getCompany();
+                                break;
+                            case 3:
+                                updateCompany();
+                                break;
+                            case 0:
+                                level2 = false;
+                                System.out.println("---------------------------");
+                                break;
+                            default:
+                                System.out.println("Incorrect input, please try again");
+                                break;
+                        }
+                    }
                     break;
                 case 3:
-                    getPerson();
-                    break;
-                case 4:
-                    flushPerson();
-                    break;
-                case 5:
-                    refreshPerson();
-                    break;
-                case 6:
-                    deletePerson();
-                    break;
-                case 7:
-                    saveCompany();
-                    break;
-                case 8:
-                    getCompany();
-                    break;
-                case 9:
-                    updateCompany();
-                    break;
-                case 10:
-                    getPersonId();
-                    break;
-                case 11:
-                    saveEvent();
+
+                    level2 = true;
+                    while (level2) {
+                        showMenuEventLevel2();
+                        try {
+                            command = scanner.nextInt();
+                        } catch (InputMismatchException e) {
+                            System.out.println("Incorrect input, parameter must be number, please try again");
+                            break;
+                        }
+                        switch (command) {
+                            case 1:
+                                saveEvent();
+                                break;
+                            case 0:
+                                level2 = false;
+                                System.out.println("---------------------------");
+                                break;
+                            default:
+                                System.out.println("Incorrect input, please try again");
+                                break;
+                        }
+                    }
                     break;
                 case 0:
                     try {
-                        if (scanner != null) {
-                            scanner.close();
-                        }
+                        scanner.close();
                     } catch (Exception e) {
                         System.err.println("Failed to close stream");
                         logger.error("Failed to close stream", e);
@@ -84,6 +144,7 @@ public class MenuLoader {
             }
         }
     }
+
 
     private static void saveEvent() {
         Event event = new Event();
@@ -258,20 +319,34 @@ public class MenuLoader {
         }
     }
 
-    private static void showMenu() {
+    private static void showMenuLevel1() {
         System.out.println("Please enter command:");
+        System.out.println("1. Person methods");
+        System.out.println("2. Company methods");
+        System.out.println("3. Events methods");
+        System.out.println("0. Exit");
+    }
+
+    private static void showMenuPersonLevel2() {
         System.out.println("1. Save or update Person");
         System.out.println("2. Load Person");
         System.out.println("3. Get Person");
         System.out.println("4. Flush Person");
         System.out.println("5. Refresh Person");
         System.out.println("6. Delete Person");
-        System.out.println("7. Save Company");
-        System.out.println("8. Get Company");
-        System.out.println("9. Update Company");
-        System.out.println("10. Get Person ID");
-        System.out.println("11. Save event");
-        System.out.println("0. Exit");
+//        System.out.println("7. Get Person ID");
+        System.out.println("0. Back");
     }
 
+    private static void showMenuCompanyLevel2() {
+        System.out.println("1. Save Company");
+        System.out.println("2. Get Company");
+        System.out.println("3. Update Company");
+        System.out.println("0. Back");
+    }
+
+    private static void showMenuEventLevel2() {
+        System.out.println("1. Save event");
+        System.out.println("0. Back");
+    }
 }
