@@ -39,11 +39,14 @@ public class PersonDAO extends BaseDAO<Person>{
             logger.info(person);
             session.flush();
             logger.info("Session flushed");
+           // Thread.sleep(5000);
             logger.info(person);
         } catch (HibernateException e) {
             logger.error("Error in flush", e);
             throw new DaoException(e);
-        }
+        }/* catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
     }
 
     public void refresh(Integer id, Integer age) throws DaoException {

@@ -1,18 +1,13 @@
 package by.pvt.kish.util;
 
-import by.pvt.kish.dao.CompanyDAO;
-import by.pvt.kish.dao.EventDAO;
 import by.pvt.kish.dao.PersonDAO;
 import by.pvt.kish.exception.DaoException;
-import by.pvt.kish.pojos.Company;
-import by.pvt.kish.pojos.Event;
 import by.pvt.kish.pojos.Person;
 import by.pvt.kish.service.CompanyService;
 import by.pvt.kish.service.EventService;
 import by.pvt.kish.service.PersonService;
 import org.apache.log4j.Logger;
 
-import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -132,6 +127,9 @@ public class MenuLoader {
                         }
                     }
                     break;
+                case 4:
+                    threadTest();
+                    break;
                 case 0:
                     try {
                         scanner.close();
@@ -148,11 +146,54 @@ public class MenuLoader {
         }
     }
 
+
+    private static void threadTest() {
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                logger.info("thread1 run");
+                try {
+                    PersonDAO.getInstance().flush(1, 15);
+                    Thread.sleep(5000);
+                    PersonDAO.getInstance().refresh(1, 25);
+                } catch (DaoException | InterruptedException e) {
+                    logger.error(e.getMessage());
+                }
+                logger.info("thread1 finished");
+            }
+        });
+        Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                logger.info("thread2 run");
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    logger.error(e.getMessage());
+                }
+                Person person = new Person();
+                person.setId(1);
+                person.setName("Alex");
+                person.setSurname("Kish");
+                person.setAge(555);
+                try {
+                    PersonDAO.getInstance().saveOrUpdate(person);
+                } catch (DaoException e) {
+                    logger.error(e.getMessage());
+                }
+                logger.info("thread2 finished");
+            }
+        });
+        thread1.start();
+        thread2.start();
+    }
+
     private static void showMenuLevel1() {
         System.out.println("Please enter command:");
         System.out.println("1. Person methods");
         System.out.println("2. Company methods");
         System.out.println("3. Events methods");
+        System.out.println("4. Threads test");
         System.out.println("0. Exit");
     }
 
