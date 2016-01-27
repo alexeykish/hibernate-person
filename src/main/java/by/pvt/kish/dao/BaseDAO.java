@@ -24,13 +24,14 @@ public class BaseDAO<T> implements DAO<T> {
         this.className = className;
     }
 
-    public T saveOrUpdate(T t) throws DaoException {
+    public Integer saveOrUpdate(T t) throws DaoException {
+        Integer iid;
         try {
             Session session = util.getSession();
             transaction = session.beginTransaction();
             session.saveOrUpdate(t);
             transaction.commit();
-            Serializable iid = session.getIdentifier(t);
+            iid = (Integer) session.getIdentifier(t);
             logger.info("ID: " + iid);
             logger.info(t);
         } catch (HibernateException e) {
@@ -38,7 +39,7 @@ public class BaseDAO<T> implements DAO<T> {
             transaction.rollback();
             throw new DaoException(e);
         }
-        return t;
+        return iid;
     }
 
     public T get(Integer id) throws  DaoException {
@@ -48,7 +49,7 @@ public class BaseDAO<T> implements DAO<T> {
             transaction = session.beginTransaction();
             t = (T) session.get(className, id);
             if (t == null) {
-                throw  new DaoException("Cant find person with that ID: " + id);
+                throw  new DaoException("Cant find object with that ID: " + id);
             }
             logger.info(t);
             transaction.commit();
@@ -84,7 +85,7 @@ public class BaseDAO<T> implements DAO<T> {
             Serializable iid = session.getIdentifier(t);
             logger.info("ID: " + iid);
             if (t == null) {
-                throw  new DaoException("Cant find person with that ID: " + id);
+                throw  new DaoException("Cant find object with that ID: " + id);
             }
             session.delete(t);
             transaction.commit();
@@ -97,7 +98,7 @@ public class BaseDAO<T> implements DAO<T> {
     }
 
     public Serializable getIdentifier(T t) throws  DaoException {
-        Serializable id = null;
+        Serializable id;
         try {
             Session session = util.getSession();
             id = session.getIdentifier(t);

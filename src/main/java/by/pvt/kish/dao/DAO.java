@@ -7,7 +7,7 @@ import by.pvt.kish.exception.DaoException;
  */
 public interface DAO<T> {
 
-    T saveOrUpdate(T t) throws DaoException;
+    Integer saveOrUpdate(T t) throws DaoException;
 
     void delete(Integer id) throws DaoException;
 

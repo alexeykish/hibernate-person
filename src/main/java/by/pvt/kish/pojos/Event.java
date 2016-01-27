@@ -1,11 +1,12 @@
 package by.pvt.kish.pojos;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author Kish Alexey
  */
-public class Event {
+public class Event implements Serializable{
 
     private String id;
     private Date date;

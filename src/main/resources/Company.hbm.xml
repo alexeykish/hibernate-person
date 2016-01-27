@@ -9,6 +9,16 @@
     <property name="name" type="string"/>
     <property name="owner" type="string"/>
     <property name="customName" formula="F_NAME" type="string"/>
+    <component name="homeAddress" class="Address">
+        <property name="street" column="F_HOME_STREET"/>
+        <property name="city" column="F_HOME_CITY"/>
+        <property name="zipCode" column="F_HOME_ZIPCODE"/>
+    </component>
+    <component name="billingAddress" class="Address">
+        <property name="street"/>
+        <property name="city"/>
+        <property name="zipCode"/>
+    </component>
 </class>
 
 </hibernate-mapping>
