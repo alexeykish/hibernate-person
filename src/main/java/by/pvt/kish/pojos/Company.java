@@ -95,11 +95,11 @@ public class Company implements Serializable{
     public String toString() {
         return "Company{" +
                 "id=" + id +
-                ",\n name='" + name + '\'' +
-                ",\n owner='" + owner + '\'' +
-                ",\n customName='" + customName + '\'' +
-                ",\n homeAddress=" + homeAddress +
-                ",\n billingAddress=" + billingAddress +
+                ", name='" + name + '\'' +
+                ", owner='" + owner + '\'' +
+                ", customName='" + customName + '\'' +
+                ", homeAddress=" + homeAddress +
+                ", billingAddress=" + billingAddress +
                 '}';
     }
 }

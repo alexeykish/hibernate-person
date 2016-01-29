@@ -74,9 +74,9 @@ public class Person implements Serializable{
     public String toString() {
         return "Person{" +
                 "id=" + id +
-                ",\n age=" + age +
-                ",\n name='" + name + '\'' +
-                ",\n surname='" + surname + '\'' +
+                ", age=" + age +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
                 '}';
     }
 }

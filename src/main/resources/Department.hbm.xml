@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="by.pvt.kish.pojos" auto-import="false" catalog="hibernate_basic">
+    <class name="Department">
+        <id name="departmentId" type="java.lang.Long">
+            <generator class="native"/>
+        </id>
+        <property name="departmentName" type="string"/>
+        <set name="employees" table="T_EMPLOYEE" inverse="true" lazy="true" fetch="select" cascade="save-update">
+            <key column="F_DEPARTMENTID" not-null="true"/>
+            <one-to-many class="Employee"/>
+        </set>
+    </class>
+
+</hibernate-mapping>

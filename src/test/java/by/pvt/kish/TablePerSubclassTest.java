@@ -23,9 +23,9 @@ public class TablePerSubclassTest {
     private S2Person person;
     private S2Employee employee;
     private S2Student student;
-    private int pid;
-    private int eid;
-    private int sid;
+    private Integer pid;
+    private Integer eid;
+    private Integer sid;
 
     @Before
     public void setUp() throws Exception {
@@ -33,21 +33,21 @@ public class TablePerSubclassTest {
         person.setName("testPersonName");
         person.setSurname("testPersonSurname");
         person.setAge(50);
-        pid = S2PersonDAO.getInstance().saveOrUpdate(person);
+        pid = (Integer) S2PersonDAO.getInstance().saveOrUpdate(person);
         employee = new S2Employee();
         employee.setName("testEmployeeName");
         employee.setSurname("testEmployeeSurname");
         employee.setAge(50);
         employee.setCompany("testCompany");
         employee.setSalary(10000.00);
-        eid = S2EmployeeDAO.getInstance().saveOrUpdate(employee);
+        eid = (Integer) S2EmployeeDAO.getInstance().saveOrUpdate(employee);
         student = new S2Student();
         student.setName("testStudentName");
         student.setSurname("testStudentSurname");
         student.setAge(50);
         student.setFaculty("testFaculty");
         student.setMark(10.00);
-        sid = S2StudentDAO.getInstance().saveOrUpdate(student);
+        sid = (Integer) S2StudentDAO.getInstance().saveOrUpdate(student);
     }
 
     @Test

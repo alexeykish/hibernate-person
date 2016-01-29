@@ -20,9 +20,9 @@ public class TablePerHierarhyTest {
     private S1Person person;
     private S1Employee employee;
     private S1Student student;
-    private int pid;
-    private int eid;
-    private int sid;
+    private Integer pid;
+    private Integer eid;
+    private Integer sid;
 
     @Before
     public void setUp() throws Exception {
@@ -30,21 +30,21 @@ public class TablePerHierarhyTest {
         person.setName("testPersonName");
         person.setSurname("testPersonSurname");
         person.setAge(50);
-        pid = S1PersonDAO.getInstance().saveOrUpdate(person);
+        pid = (Integer) S1PersonDAO.getInstance().saveOrUpdate(person);
         employee = new S1Employee();
         employee.setName("testEmployeeName");
         employee.setSurname("testEmployeeSurname");
         employee.setAge(50);
         employee.setCompany("testCompany");
         employee.setSalary(10000.00);
-        eid = S1EmployeeDAO.getInstance().saveOrUpdate(employee);
+        eid = (Integer) S1EmployeeDAO.getInstance().saveOrUpdate(employee);
         student = new S1Student();
         student.setName("testStudentName");
         student.setSurname("testStudentSurname");
         student.setAge(50);
         student.setFaculty("testFaculty");
         student.setMark(10.00);
-        sid = S1StudentDAO.getInstance().saveOrUpdate(student);
+        sid = (Integer) S1StudentDAO.getInstance().saveOrUpdate(student);
     }
 
     @Test

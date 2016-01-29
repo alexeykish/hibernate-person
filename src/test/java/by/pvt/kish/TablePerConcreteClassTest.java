@@ -20,9 +20,9 @@ public class TablePerConcreteClassTest {
     private S3Person person;
     private S3Employee employee;
     private S3Student student;
-    private int pid;
-    private int eid;
-    private int sid;
+    private Integer pid;
+    private Integer eid;
+    private Integer sid;
 
     @Before
     public void setUp() throws Exception {
@@ -30,21 +30,21 @@ public class TablePerConcreteClassTest {
         person.setName("testPersonName");
         person.setSurname("testPersonSurname");
         person.setAge(50);
-        pid = S3PersonDAO.getInstance().saveOrUpdate(person);
+        pid = (Integer) S3PersonDAO.getInstance().saveOrUpdate(person);
         employee = new S3Employee();
         employee.setName("testEmployeeName");
         employee.setSurname("testEmployeeSurname");
         employee.setAge(50);
         employee.setCompany("testCompany");
         employee.setSalary(10000.00);
-        eid = S3EmployeeDAO.getInstance().saveOrUpdate(employee);
+        eid = (Integer) S3EmployeeDAO.getInstance().saveOrUpdate(employee);
         student = new S3Student();
         student.setName("testStudentName");
         student.setSurname("testStudentSurname");
         student.setAge(50);
         student.setFaculty("testFaculty");
         student.setMark(10.00);
-        sid = S3StudentDAO.getInstance().saveOrUpdate(student);
+        sid = (Integer) S3StudentDAO.getInstance().saveOrUpdate(student);
     }
 
     @Test

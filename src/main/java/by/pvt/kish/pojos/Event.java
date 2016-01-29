@@ -43,8 +43,8 @@ public class Event implements Serializable{
     public String toString() {
         return "Event{" +
                 "id='" + id + '\'' +
-                ",\n date=" + date +
-                ",\n title='" + title + '\'' +
+                ", date=" + date +
+                ", title='" + title + '\'' +
                 '}';
     }
 }
