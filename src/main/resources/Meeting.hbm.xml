@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="by.pvt.kish.pojos" catalog="hibernate_basic">
+    <class name="Meeting">
+        <id name="meetingId" type="java.lang.Long">
+            <generator class="increment"/>
+        </id>
+        <property name="subject" type="string"/>
+        <set name="employees" table="T_EMPLOYEE_MEETING" inverse="true" lazy="true" fetch="select">
+            <key column="F_MEETINGID" />
+            <many-to-many column="F_EMPLOYEEID" class="Employee" />
+        </set>
+    </class>
+
+</hibernate-mapping>

@@ -17,5 +17,9 @@
         <mapping resource="S1Person.hbm.xml"/>
         <mapping resource="S2Person.hbm.xml"/>
         <mapping resource="S3Person.hbm.xml"/>
+        <mapping resource="Employee.hbm.xml"/>
+        <mapping resource="EmployeeDetail.hbm.xml"/>
+        <mapping resource="Department.hbm.xml"/>
+        <mapping resource="Meeting.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
