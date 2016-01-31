@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="by.pvt.kish.pojos.s3a" auto-import="false" catalog="hibernate_basic">
+    <class name="S3APerson" lazy="true" abstract="true">
+        <id name="id" type="int">
+            <generator class="increment"/>
+        </id>
+        <property name="name" type="string"/>
+        <property name="surname" type="string"/>
+        <property name="age" type="int"/>
+        <union-subclass name="S3AEmployee">
+            <property name="company"/>
+            <property name="salary"/>
+        </union-subclass>
+        <union-subclass name="S3AStudent">
+            <property name="faculty"/>
+            <property name="mark"/>
+        </union-subclass>
+
+    </class>
+
+
+</hibernate-mapping>

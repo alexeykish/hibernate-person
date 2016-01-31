@@ -53,8 +53,6 @@ public class TablePerHierarhyTest {
         employee.setId(eid);
         student.setId(sid);
         S1Person addedPerson = S1PersonDAO.getInstance().get(pid);
-        S1Student studentPerson = S1StudentDAO.getInstance().get(pid);
-        System.out.println(studentPerson);
         assertEquals("Add method failed: wrong name", addedPerson, person);
         S1Employee addedEmployee = S1EmployeeDAO.getInstance().get(eid);
         assertEquals("Add method failed: wrong name", addedEmployee, employee);
