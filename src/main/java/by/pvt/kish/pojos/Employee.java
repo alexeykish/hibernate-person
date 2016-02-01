@@ -1,22 +1,37 @@
 package by.pvt.kish.pojos;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 /**
  * @author Kish Alexey
  */
-public class Employee {
-
+public class Employee implements Serializable{
     private Long employeeId;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String cellphone;
     private EmployeeDetail employeeDetail;
     private Department department;
-    private Set<Meeting> meetings = new HashSet<>();
+    private Set<Meeting> meetings = new HashSet<Meeting>();
 
     public Employee() {
+    }
+
+    public Employee(String firstName, String lastName, String cellphone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.cellphone = cellphone;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = employeeId != null ? employeeId.hashCode() : 0;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (cellphone != null ? cellphone.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -26,26 +41,13 @@ public class Employee {
 
         Employee employee = (Employee) o;
 
-        if (employeeId != null ? !employeeId.equals(employee.employeeId) : employee.employeeId != null) return false;
-        if (firstname != null ? !firstname.equals(employee.firstname) : employee.firstname != null) return false;
-        if (lastname != null ? !lastname.equals(employee.lastname) : employee.lastname != null) return false;
+        if (employeeId != employee.employeeId) return false;
+        if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) return false;
         if (cellphone != null ? !cellphone.equals(employee.cellphone) : employee.cellphone != null) return false;
-        if (employeeDetail != null ? !employeeDetail.equals(employee.employeeDetail) : employee.employeeDetail != null)
-            return false;
-        return department != null ? department.equals(employee.department) : employee.department == null;
+        return employeeDetail != null ? employeeDetail.equals(employee.employeeDetail) : employee.employeeDetail == null;
 
     }
-
-//    @Override
-//    public int hashCode() {
-//        int result = employeeId != null ? employeeId.hashCode() : 0;
-//        result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
-//        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-//        result = 31 * result + (cellphone != null ? cellphone.hashCode() : 0);
-//        result = 31 * result + (employeeDetail != null ? employeeDetail.hashCode() : 0);
-//        result = 31 * result + (department != null ? department.hashCode() : 0);
-//        return result;
-//    }
 
     public Long getEmployeeId() {
         return employeeId;
@@ -55,20 +57,20 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getCellphone() {
@@ -107,11 +109,10 @@ public class Employee {
     public String toString() {
         return "Employee{" +
                 "employeeId=" + employeeId +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", cellphone='" + cellphone + '\'' +
                 ", department=" + department +
-                ", meetings=" + meetings +
                 '}';
     }
 }

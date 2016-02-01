@@ -15,6 +15,10 @@ public class Department {
     public Department() {
     }
 
+    public Department(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -23,19 +27,16 @@ public class Department {
         Department that = (Department) o;
 
         if (departmentId != null ? !departmentId.equals(that.departmentId) : that.departmentId != null) return false;
-        if (departmentName != null ? !departmentName.equals(that.departmentName) : that.departmentName != null)
-            return false;
-        return employees != null ? employees.equals(that.employees) : that.employees == null;
+        return departmentName != null ? departmentName.equals(that.departmentName) : that.departmentName == null;
 
     }
 
-//    @Override
-//    public int hashCode() {
-//        int result = departmentId != null ? departmentId.hashCode() : 0;
-//        result = 31 * result + (departmentName != null ? departmentName.hashCode() : 0);
-//        result = 31 * result + (employees != null ? employees.hashCode() : 0);
-//        return result;
-//    }
+    @Override
+    public int hashCode() {
+        int result = departmentId != null ? departmentId.hashCode() : 0;
+        result = 31 * result + (departmentName != null ? departmentName.hashCode() : 0);
+        return result;
+    }
 
     public Long getDepartmentId() {
         return departmentId;

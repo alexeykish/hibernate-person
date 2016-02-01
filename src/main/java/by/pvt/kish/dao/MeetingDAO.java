@@ -1,6 +1,5 @@
 package by.pvt.kish.dao;
 
-import by.pvt.kish.pojos.Department;
 import by.pvt.kish.pojos.Meeting;
 
 /**

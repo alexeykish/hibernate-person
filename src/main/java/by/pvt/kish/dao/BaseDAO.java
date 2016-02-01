@@ -32,8 +32,8 @@ public class BaseDAO<T> implements DAO<T> {
             session.saveOrUpdate(t);
             transaction.commit();
             iid = session.getIdentifier(t);
-            logger.info("Saved ID: " + iid);
-            logger.info(t);
+            logger.info("Generated ID: " + iid);
+            logger.info("Saved object: " + t);
         } catch (HibernateException e) {
             logger.error("Error in save or update DAO", e);
             transaction.rollback();
@@ -48,7 +48,7 @@ public class BaseDAO<T> implements DAO<T> {
             Session session = util.getSession();
             transaction = session.beginTransaction();
             t = (T) session.get(className, id);
-            logger.info(t);
+            logger.info("Get object: " + t);
             transaction.commit();
         } catch (HibernateException e) {
             logger.error("Error in save or update DAO", e);
@@ -59,14 +59,11 @@ public class BaseDAO<T> implements DAO<T> {
     }
 
     public T load(Serializable id) throws  DaoException {
-        T t;
+        T t = null;
         try {
             Session session = util.getSession();
             transaction = session.beginTransaction();
             t = (T) session.load(className, id);
-            if (t == null) {
-                throw  new HibernateException("Cant find object with that ID: " + id);
-            }
             logger.info(t);
             transaction.commit();
         } catch (HibernateException e) {
@@ -82,10 +79,8 @@ public class BaseDAO<T> implements DAO<T> {
             Session session = util.getSession();
             transaction = session.beginTransaction();
             T t = (T) session.get(className, id);
-            Serializable iid = session.getIdentifier(t);
-            logger.info("Deleted ID: " + iid);
             if (t == null) {
-                throw  new HibernateException("Cant find object with that ID: " + id);
+                throw  new DaoException("Cant find object with that ID: " + id);
             }
             session.delete(t);
             transaction.commit();

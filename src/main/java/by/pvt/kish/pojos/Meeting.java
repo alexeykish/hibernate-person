@@ -10,9 +10,33 @@ public class Meeting {
 
     private Long meetingId;
     private String subject;
-    private Set<Employee> employees = new HashSet<>();
+
+    private Set<Employee> employees = new HashSet<Employee>();
+
+    public Meeting(String subject) {
+        this.subject = subject;
+    }
 
     public Meeting() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Meeting meeting = (Meeting) o;
+
+        if (meetingId != null ? !meetingId.equals(meeting.meetingId) : meeting.meetingId != null) return false;
+        return subject != null ? subject.equals(meeting.subject) : meeting.subject == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = meetingId != null ? meetingId.hashCode() : 0;
+        result = 31 * result + (subject != null ? subject.hashCode() : 0);
+        return result;
     }
 
     public Long getMeetingId() {

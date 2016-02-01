@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="by.pvt.kish.pojos" auto-import="false" catalog="hibernate_basic">
+<hibernate-mapping package="by.pvt.kish.pojos" catalog="hibernate_basic">
     <class name="Employee">
         <id name="employeeId" type="java.lang.Long">
-            <generator class="native"/>
+            <generator class="increment"/>
         </id>
         <one-to-one name="employeeDetail" class="EmployeeDetail" cascade="all"/>
         <many-to-one name="department" class="Department" fetch="select" column="F_DEPARTMENTID"/>
-        <set name="meetings" table="T_EMPLOYEE_MEETING" inverse="false" lazy="true" fetch="select" cascade="all">
-            <key column="F_EMPLOYEEID"/>
-            <many-to-many column="F_MEETINGID" class="Meeting"/>
+        <set name="meetings" table="T_EMPLOYEE_MEETING" inverse="false" lazy="true" fetch="select">
+            <key column="F_EMPLOYEEID" />
+            <many-to-many column="F_MEETINGID" class="Meeting" />
         </set>
-        <property name="firstname" type="string"/>
-        <property name="lastname" type="string"/>
+        <property name="firstName" type="string"/>
+        <property name="lastName" type="string"/>
         <property name="cellphone" type="string"/>
     </class>
 

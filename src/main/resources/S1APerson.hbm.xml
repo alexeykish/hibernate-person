@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="by.pvt.kish.pojos.s1" auto-import="false" catalog="hibernate_basic">
-    <class name="S1Person" lazy="true" discriminator-value="P" polymorphism="implicit">
+<hibernate-mapping package="by.pvt.kish.pojos.s1a" catalog="hibernate_basic">
+    <class name="S1APerson" lazy="true" discriminator-value="P" polymorphism="implicit" abstract="true">
         <id name="id" type="int">
             <generator class="increment"/>
         </id>
-        <discriminator column="F_S1PERSON_TYPE" type="string"/>
+        <discriminator column="F_S1APERSON_TYPE" type="string"/>
         <property name="name" type="string" not-null="true"/>
         <property name="surname" type="string" not-null="true"/>
         <property name="age" type="int" not-null="true"/>
-        <subclass name="S1Employee" discriminator-value="E">
+        <subclass name="S1AEmployee" discriminator-value="E">
             <property name="company"/>
             <property name="salary"/>
         </subclass>
-        <subclass name="S1Student" discriminator-value="S">
+        <subclass name="S1AStudent" discriminator-value="S">
             <property name="faculty"/>
             <property name="mark"/>
         </subclass>

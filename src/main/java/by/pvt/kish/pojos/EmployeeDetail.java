@@ -1,10 +1,11 @@
 package by.pvt.kish.pojos;
 
+import java.io.Serializable;
+
 /**
  * @author Kish Alexey
  */
-public class EmployeeDetail {
-
+public class EmployeeDetail implements Serializable{
     private Long employeeId;
     private String street;
     private String city;
@@ -15,6 +16,13 @@ public class EmployeeDetail {
     public EmployeeDetail() {
     }
 
+    public EmployeeDetail(String street, String city, String state, String country) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -22,7 +30,7 @@ public class EmployeeDetail {
 
         EmployeeDetail that = (EmployeeDetail) o;
 
-        if (employeeId != null ? !employeeId.equals(that.employeeId) : that.employeeId != null) return false;
+        if (employeeId != that.employeeId) return false;
         if (street != null ? !street.equals(that.street) : that.street != null) return false;
         if (city != null ? !city.equals(that.city) : that.city != null) return false;
         if (state != null ? !state.equals(that.state) : that.state != null) return false;
@@ -31,16 +39,15 @@ public class EmployeeDetail {
 
     }
 
-//    @Override
-//    public int hashCode() {
-//        int result = employeeId != null ? employeeId.hashCode() : 0;
-//        result = 31 * result + (street != null ? street.hashCode() : 0);
-//        result = 31 * result + (city != null ? city.hashCode() : 0);
-//        result = 31 * result + (state != null ? state.hashCode() : 0);
-//        result = 31 * result + (country != null ? country.hashCode() : 0);
-//        result = 31 * result + (employee != null ? employee.hashCode() : 0);
-//        return result;
-//    }
+    @Override
+    public int hashCode() {
+        int result = employeeId != null ? employeeId.hashCode() : 0;
+        result = 31 * result + (street != null ? street.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        return result;
+    }
 
     public Long getEmployeeId() {
         return employeeId;
@@ -93,11 +100,11 @@ public class EmployeeDetail {
     @Override
     public String toString() {
         return "EmployeeDetail{" +
-                "country='" + country + '\'' +
-                ", state='" + state + '\'' +
-                ", city='" + city + '\'' +
+                "employeeId=" + employeeId +
                 ", street='" + street + '\'' +
-                ", employeeId=" + employeeId +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", country='" + country + '\'' +
                 '}';
     }
 }
